@@ -4,17 +4,18 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4 class="mb-4">Daftar Staff</h4>
+    <h4 class="mb-4">Data Staff</h4>
+    <a href="{{ route('staff.create') }}" class="btn btn-primary mb-3">
+        <i class="fa fa-plus"></i> Tambah Staff
+    </a>
     <div class="card shadow">
         <div class="card-body">
-            <a href="{{ route('staff.create') }}" class="btn btn-primary mb-3">
-                <i class="fa fa-plus"></i> Tambah Staff
-            </a>
+
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="staffTable">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Nomor HP</th>

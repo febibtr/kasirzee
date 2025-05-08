@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailTransaksi; // pastikan model DetailTransaksi sudah ada
+use App\Models\DetailTransaksi; 
 use Illuminate\Http\Request;
 
 class DetailTransaksiController extends Controller
@@ -15,7 +15,7 @@ class DetailTransaksiController extends Controller
 
     public function create()
     {
-        return view('detail_transaksi.create'); // buat file create.blade.php di resources/views/detail_transaksi
+        return view('detail_transaksi.create'); 
     }
 
     public function store(Request $request)

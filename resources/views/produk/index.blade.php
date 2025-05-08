@@ -1,41 +1,61 @@
 @extends('layouts.master')
 
+@section('title', 'Daftar Produk')
+
 @section('content')
-<div class="container">
-    <h1>Produk</h1>
-    {{-- <a href="{{ route('produk.create') }}" class="btn btn-primary">Tambah Produk</a> --}}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Produk</th>
-                <th>Kategori ID</th>
-                <th>stok</th>
-                <th>Harga beli</th>
-                <th>Harga Jual</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($produk as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->nama }}</td>
-                    <td>{{ $item->kategori_id }}</td>
-                    <td>{{ $item->stok }}</td>
-                    <td>{{ $item->harga_beli }}</td>
-                    <td>{{ $item->harga_jual }}</td>
-                    <td>
-                        {{-- <a href="{{ route('produk.edit', $produk->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('produk.destroy', $produk->id) }}" method="POST" style="display:inline;"> --}}
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-                        <a href="{{ route('produk.show', $item->id) }}" class="btn btn-info">Lihat</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div class="container-fluid">
+    <h4 class="mb-4">Daftar Produk</h4>
+    <a href="{{ route('produk.create') }}" class="btn btn-primary mb-3">
+        <i class="fa fa-plus"></i> Tambah Produk
+    </a>
+    <div class="card shadow">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="produkTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama Produk</th>
+                            <th>Kategori</th>
+                            <th>Tipe</th>
+                            <th>Stok</th>
+                            <th>Harga Jual</th>
+                            <th>Diskon</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($produk as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->kategori ? $item->kategori->nama : 'Tidak Ada' }}</td>
+                            <td>{{ ucfirst($item->tipe) }}</td>
+                            <td>{{ $item->stok }}</td>
+                            <td>{{ number_format($item->harga_jual, 2) }}</td>
+                            <td>{{ $item->diskon ? $item->diskon . '%' : 'Tidak ada' }}</td>
+                            <td>
+                                <a href="{{ route('produk.show', $item->id) }}" class="btn btn-info btn-sm">
+                                    <i class="fa fa-eye"></i> Detail
+                                </a>
+                                <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+                                <form action="{{ route('produk.destroy', $item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Hapus produk ini?')">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

@@ -11,17 +11,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // Ambil data yang diperlukan untuk dashboard
-        // Misalnya, statistik, laporan, atau data lain yang diperlukan
-        $data = [
-            'totalProduk' => 100, // Contoh data
-            'totalPelanggan' => 50,
-            'totalTransaksi' => 200,
-            // Tambahkan data lain sesuai kebutuhan
-        ];
-
-        // Kembalikan tampilan dashboard dengan data
-        return view('dashboard.index', compact('data'));
+       
+        return view('dashboard.index');
     }
     /**
      * Show the form for creating a new resource.
